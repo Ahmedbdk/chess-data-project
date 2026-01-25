@@ -66,3 +66,26 @@ bronze_record = {
 }
 
 print(bronze_record)
+
+bronze_records = []
+
+for game in games_data["games"]:
+    base_time, increment = parse_time_control(game.get("time_control", "0"))
+
+    bronze_record = {
+        "game_id": game["uuid"],
+        "player_username": username,
+        "source": "chesscom",
+        "time_control": game.get("time_control"),
+        "base_time_seconds": base_time,
+        "increment_seconds": increment,
+        "time_class": game.get("time_class"),
+        "raw_json": game
+    }
+
+    bronze_records.append(bronze_record)
+
+print("---------------------------------------------------")
+
+print("Total bronze records:", len(bronze_records))
+print("First record:\n", bronze_records[0])

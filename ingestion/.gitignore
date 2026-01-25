@@ -1,0 +1,2 @@
+# Ignore Snowflake credentials
+config/snowflake_config.py
