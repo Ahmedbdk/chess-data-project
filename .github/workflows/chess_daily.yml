@@ -1,0 +1,35 @@
+name: Daily Chess Data Update
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # tous les jours à 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  run-etl:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run chess ETL
+        run: |
+          python chess_daily_etl.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/*.csv state.json
+          git commit -m "Daily chess data update" || echo "No changes"
+          git push
