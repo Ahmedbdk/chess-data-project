@@ -13,13 +13,13 @@ if df is not None and not df.empty:
     df = transform_main(df)
 
     # --- Enrich ---
-    gold_df = enrich_main(df)
+    df = enrich_main(df)
 
     # --- Merge avec CSV existant si besoin ---
     if os.path.exists(DATA_FILE):
         existing = pd.read_csv(DATA_FILE, parse_dates=["end_datetime"])
-        gold_df = pd.concat([existing, gold_df]).drop_duplicates(subset="uuid").sort_values("end_datetime")
+        df = pd.concat([existing, df]).drop_duplicates(subset="uuid").sort_values("end_datetime")
 
     # --- Save final CSV ---
-    gold_df.to_csv(DATA_FILE, index=False)
+    df.to_csv(DATA_FILE, index=False)
     print(f"✔ CSV updated: {DATA_FILE}")
