@@ -104,7 +104,6 @@ def main():
     # =========================
     # GOLD TRANSFORMATION (player-centric)
     # =========================
-    gold_df = bronze_df.drop_duplicates(subset="uuid").copy()
     gold_df["player"] = USERNAME
 
     gold_df["opponent"] = np.where(
