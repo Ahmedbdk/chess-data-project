@@ -29,6 +29,6 @@ jobs:
       run: |
         git config user.name "github-actions"
         git config user.email "actions@github.com"
-        git add data/chess_games.csv data/state.json
+        git add data/chess_games.csv
         git commit -m "Update CSV from daily ETL" || echo "No changes to commit"
         git push 
