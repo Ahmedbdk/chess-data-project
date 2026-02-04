@@ -31,7 +31,7 @@ def get_player_country(username):
         return None
 
 
-def enrich_opponent_countries(gold_df, max_workers=10):
+def enrich_opponent_countries(gold_df, max_workers=11):
     """
     Add 'opponent_country' column to a GOLD dataframe.
     """
