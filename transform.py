@@ -16,32 +16,6 @@ def transform_main(df: pd.DataFrame) -> pd.DataFrame:
     df['black_elo'] = df['black_elo'].astype('Int64')
 
 
-    
-    mask_duplicates = df.duplicated(subset='uuid', keep=False)
-
-
-    nb_lignes_dupliquees = mask_duplicates.sum()
-    print(f"Nombre de lignes dupliquées : {nb_lignes_dupliquees}")
-
-
-    lignes_dupliquees = df[mask_duplicates]
-    print("Lignes dupliquées :")
-    print(lignes_dupliquees)
-
-
-    df = df.drop_duplicates(subset='uuid')# 🔍 Détection des doublons
-    mask_duplicates = df.duplicated(subset='uuid', keep=False)
-
-
-    nb_lignes_dupliquees = mask_duplicates.sum()
-    print(f"Nombre de lignes dupliquées : {nb_lignes_dupliquees}")
-
-
-    lignes_dupliquees = df[mask_duplicates]
-    print("Lignes dupliquées :")
-    print(lignes_dupliquees)
-
-
     df = df.drop_duplicates(subset='uuid')
 
     return df
