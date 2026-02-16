@@ -29,7 +29,7 @@ def parse_player_info(info):
     return pd.DataFrame(table)
 
 def extract_player():
-    print("▶ Starting Player Info ETL")
+    print("Starting Player Info ETL")
 
     info= get_player_info(USERNAME)
     df = parse_player_info(info)

@@ -6,9 +6,7 @@ from config import USERNAME, STATE_FILE, DATA_FILE, HEADERS
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
-# =========================
-# API FUNCTIONS
-# =========================
+
 def get_archives(username):
     url = f"https://api.chess.com/pub/player/{username}/games/archives"
     r = requests.get(url, headers=HEADERS)
@@ -21,16 +19,13 @@ def get_games_from_archive(archive_url):
         r.raise_for_status()
         return r.json().get("games", [])
     except requests.exceptions.HTTPError as e:
-        print(f"⚠️ HTTP error for {archive_url}: {e}")
+        print(f"HTTP error for {archive_url}: {e}")
         return []
     except Exception as e:
-        print(f"⚠️ Unexpected error for {archive_url}: {e}")
+        print(f"Unexpected error for {archive_url}: {e}")
         return []
 
 
-# =========================
-# STATE MANAGEMENT
-# =========================
 def load_last_archive():
     if os.path.exists(STATE_FILE):
         with open(STATE_FILE, "r") as f:
@@ -41,9 +36,7 @@ def save_last_archive(archive_url):
     with open(STATE_FILE, "w") as f:
         json.dump({"last_processed_archive": archive_url}, f)
 
-# =========================
-# PARSING
-# =========================
+
 def parse_games(games):
     rows = []
     for g in games:
@@ -66,7 +59,7 @@ def parse_games(games):
         })
     return pd.DataFrame(rows)
 def extract_main(max_workers=5):
-    print("▶ Starting daily Chess ETL")
+    print("Starting daily Chess ETL")
 
     archives = get_archives(USERNAME)
     last_archive = load_last_archive()
@@ -82,10 +75,10 @@ def extract_main(max_workers=5):
         if current_archive not in archives_to_process:
             archives_to_process.append(current_archive)
 
-    print(f"▶ Archives to process: {len(archives_to_process)}")
+    print(f"Archives to process: {len(archives_to_process)}")
 
     if not archives_to_process:
-        print("▶ No new archives")
+        print("No new archives")
         return
 
     games = []
@@ -107,12 +100,12 @@ def extract_main(max_workers=5):
                 games.extend(archive_games)
                 save_last_archive(archive_url)
             except Exception as e:
-                print(f"❌ Failed archive {archive_url}: {e}")
+                print(f"Failed archive {archive_url}: {e}")
 
 
 
     if not games:
-        print("▶ No new games found")
+        print("No new games found")
         return
 
     df = parse_games(games)

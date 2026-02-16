@@ -8,10 +8,7 @@ HEADERS = {
 
 
 def get_player_country(username):
-    """
-    Fetch country code of a Chess.com player.
-    Returns country code (e.g. 'US', 'FR') or None.
-    """
+
     try:
         url = f"https://api.chess.com/pub/player/{username}"
         r = requests.get(url, headers=HEADERS, timeout=10)
@@ -32,9 +29,7 @@ def get_player_country(username):
 
 
 def enrich_opponent_countries(gold_df, max_workers=11):
-    """
-    Add 'opponent_country' column to a GOLD dataframe.
-    """
+    
     unique_opponents = gold_df["opponent"].dropna().unique()
     opponent_country_map = {}
 
