@@ -14,6 +14,9 @@ def enrich_main(df: pd.DataFrame) -> pd.DataFrame:
     df["result"] = np.where(df["white"] == USERNAME,
                                  df["result_white"],
                                  df["result_black"])
+    df["opponent_result"] = np.where(df["white"] == USERNAME,
+                                 df["result_black"],
+                                 df["result_white"])
     df["player_elo"] = np.where(df["white"] == USERNAME,
                                      df["white_elo"],
                                      df["black_elo"])
@@ -38,6 +41,7 @@ def enrich_main(df: pd.DataFrame) -> pd.DataFrame:
         "opponent_elo",
         "player_color",
         "result",
+        "opponent_result",
         "time_class",
         "time_control",
         "opening",
@@ -46,5 +50,5 @@ def enrich_main(df: pd.DataFrame) -> pd.DataFrame:
         "player_accuracy",
         "url"
     ]]
-
+    print(df['opponent_result'])
     return df

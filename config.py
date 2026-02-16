@@ -4,7 +4,7 @@ import os
 # =========================
 # CONFIGURATION
 # =========================
-USERNAME = "ahmedbdk".lower()
+USERNAME = "dengrimmeko".lower()
 OUTPUT_DIR = "data"
 STATE_FILE = os.path.join(OUTPUT_DIR, "state.json")
 DATA_FILE = os.path.join(OUTPUT_DIR, "chess_games.csv")
