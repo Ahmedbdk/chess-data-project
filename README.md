@@ -6,6 +6,18 @@ The pipeline is modular, incremental, and scheduled, following core data enginee
 
 ---
 
+## How to Run the Project
+
+To use this project, update the `USERNAME` variable inside the `config.py` file with any Chess.com username you would like to analyze.
+
+After updating the configuration, run the main pipeline by executing:
+
+`ETL.py`
+
+The pipeline will automatically extract the user's games from the Chess.com API, clean and transform the raw data, enrich it with additional features, and generate a structured dataset ready for analysis. Once it's done, you can open the `chess_games.pbix` file, click the refresh button and your dashboards will be ready in a few seconds.
+
+---
+
 ## What I Built
 
 - Extracted chess games and player data from the Chess.com API  
